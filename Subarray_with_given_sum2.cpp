@@ -29,7 +29,7 @@ int main()
 			sum = sum - a[st];
 			// cout << sum << endl;
 		}
-
+ 
 		if (sum == s)
 		{
 			cout << st + 1 << " " << en;
