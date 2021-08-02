@@ -1,1 +1,4 @@
-a[a[i] - 1] != a[i]
+cout << "Hello";
+		// quicks(arr, 0, n);
+		// cout << "Hii";
+		
