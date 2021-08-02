@@ -4,7 +4,7 @@
 #include <bits/stdc++.h>
 using namespace std;
 
-// A structure to represent a job
+// A structure to represeNnt a job
 struct Job
 {
 	int id;		// Job Id
@@ -25,49 +25,15 @@ struct Job
 class Solution
 {
 public:
-	//Function to find the maximum profit and the number of jobs done.
-	void swap(int *a, int *b)
+	static bool compare(struct Job a, struct Job b)
 	{
-		int t = *a;
-		*a = *b;
-		*b = t;
-	}
-	int partition(Job arr[], int low, int high)
-	{
-		int pivot = arr[high].profit; // pivot
-		int i = (low - 1);			  // Index of smaller element and indicates the right position of pivot found so far
-
-		for (int j = low; j <= high - 1; j++)
-		{
-			// If current element is smaller than the pivot
-			if (arr[j].profit < pivot)
-			{
-				i++; // increment index of smaller element
-				swap(&arr[i].id, &arr[j].id);
-				swap(&arr[i].dead, &arr[j].dead);
-				swap(&arr[i].profit, &arr[j].profit);
-			}
-		}
-		swap(&arr[i + 1].id, &arr[high].id);
-		swap(&arr[i + 1].dead, &arr[high].dead);
-		swap(&arr[i + 1].profit, &arr[high].profit);
-		return (i + 1);
+		return a.profit > b.profit;
 	}
 
-	void quicks(Job arr[], int low, int high)
-	{
-		if (low < high)
-		{
-			int pi = partition(arr, low, high);
-
-			quicks(arr, low, pi - 1);
-			quicks(arr, pi + 1, high);
-		}
-	}
-	vector<int> JobScheduling(Job arr[], int n)
+	vector<int> JobScheduling(struct Job arr[], int n)
 	{
 		// your code here
-		quicks(arr, 0, n);
+		sort(arr, arr + n, compare);
 		int max = 0;
 		for (int i = 0; i < n; i++)
 		{
@@ -76,12 +42,9 @@ public:
 				max = arr[i].dead;
 			}
 		}
-		for (int i = 0; i < n; i++)
-		{
-			cout << arr[i].profit << " " << arr[i].dead << endl;
-		}
+
 		int ans[max] = {0};
-		for (int i = n - 1; i >= 0; i--)
+		for (int i = 0; i < n; i++)
 		{
 			int pos = arr[i].dead - 1;
 			while (pos >= 0 && ans[pos] != 0)
@@ -93,7 +56,7 @@ public:
 				ans[pos] = arr[i].profit;
 			}
 		}
-		cout << "hello";
+
 		int sum = 0, cnt = 0;
 		for (int i = 0; i < max; i++)
 		{
@@ -104,8 +67,8 @@ public:
 			}
 		}
 		vector<int> res;
-		res.push_back(10);
-		res.push_back(20);
+		res.push_back(cnt);
+		res.push_back(sum);
 
 		return res;
 	}
