@@ -1,58 +1,47 @@
 #include <bits/stdc++.h>
 using namespace std;
+
+bool compare(vector<int> m, vector<int> n)
+{
+	if (m[0] == n[0])
+		return m[1] > n[1];
+	else
+		return m[0] < n[0];
+}
+
 int main()
 {
-
-	int n, m;
-	cin >> n >> m;
-	int a[n];
-	for (int i = 0; i < n; i++)
+	int c, r;
+	cin >> c >> r;
+	vector<int> a(c);
+	for (int i = 0; i < c; i++)
 	{
 		cin >> a[i];
 	}
-	vector<pair<int, int>> vect;
 
-	for (int i = 0; i < m; i++)
+	vector<vector<int>> road;
+	for (int i = 0; i < r; i++)
 	{
-		int x1, x2;
-		cin >> x1 >> x2;
-		vect.push_back(make_pair(x1, x2));
+		int s, e;
+		cin >> s >> e;
+		road.push_back({s, e});
 	}
 
-	bool b[n];
-	for (int i = 0; i < n; i++)
-	{
-		b[i] = false;
-	}
-	b[0] = true;
-	int pos = 1;
-	int x = 0;
+	sort(road.begin(), road.end(), compare);
+	int curr = 0;
 	int cnt = 1;
-	while (true)
+	for (int i = 0; i < r; i++)
 	{
-		for (int i = 0; i < vect.size(); i++)
+		if (curr == road[i][0] - 1)
 		{
-			if (vect[i].first == pos)
+			if (a[road[i][0] - 1] != a[road[i][1] - 1])
 			{
-				if (a[vect[i].first - 1] != a[vect[i].second - 1])
-				{
-					b[vect[i].second] = true;
-					pos = vect[i].second;
-					x = 1;
-					cnt++;
- 
-					break;
-				}
+
+				curr = road[i][1] - 1;
+				cnt++;
 			}
-			else
-			{
-				x = 0;
-			}
-		}
-		if (x == 0)
-		{
-			break;
 		}
 	}
 	cout << cnt;
+	return 0;
 }
