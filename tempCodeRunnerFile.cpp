@@ -1,4 +1,4 @@
-cout << "Hello";
-		// quicks(arr, 0, n);
-		// cout << "Hii";
-		
+for (int i = 0; i < vec.size(); i++)
+	{
+		cout << vec[i] << " ";
+	}
