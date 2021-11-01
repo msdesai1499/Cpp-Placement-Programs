@@ -1,44 +1,42 @@
-
+#include <iostream>
 #include <bits/stdc++.h>
-using namespace std;
 
-int fact_fun(int n)
-{
-	int fact = 1;
-	for (int i = 1; i <= n; i++)
-	{
-		fact = fact * i;
-	}
-	return fact;
-}
+using namespace std;
 int main()
 {
-	int n;
-	cin >> n;
-	int i, j;
-	int coef;
 
-	for (i = 0; i <= n; i++)
+	int m, n;
+	cin >> m >> n;
+	int arr1[m];
+	int arr2[n];
+
+	for (int i = 0; i < m; i++)
 	{
-		for (j = 0; j <= n - i; j++)
-		{
-			cout << " ";
-		}
-		for (j = 0; j <= i; j++)
-		{
-			if (j == 0 || j == i)
-			{
-				coef = 1;
-			}
-			else
-			{
-				coef = fact_fun(i) / (fact_fun(i - j) * fact_fun(j));
-			}
-			cout << coef << " ";
-		}
-
-		cout << endl;
+		cin >> arr1[i];
 	}
 
+	for (int i = 0; i < n; i++)
+	{
+		cin >> arr2[i];
+	}
+	int arr3[m + n];
+	int i = 0;
+	for (i = 0; i < m; i++)
+	{
+		arr3[i] = arr1[i];
+	}
+
+	for (int j = 0; j < n; j++)
+	{
+
+		arr3[i] = arr2[j];
+		i++;
+	}
+
+	sort(arr3, arr3 + m + n, greater<int>());
+	for (int j = 0; j < m + n; j++)
+	{
+		cout << arr3[j] << endl;
+	}
 	return 0;
 }

@@ -66,6 +66,22 @@ void display()
 	}
 }
 
+int deletion(int val)
+{
+	node *temp, *curr;
+	curr = head;
+	if (curr->data == val)
+	{
+		head = head->next;
+	}
+	while (curr->data != val)
+	{
+		temp = curr;
+		curr = curr->next;
+	}
+	temp->next = curr->next;
+}
+
 int main()
 {
 
@@ -73,7 +89,7 @@ int main()
 
 	do
 	{
-		cout << "Press 1- insert  2 - display 3-insert at head 0- exit";
+		cout << "Press 1- insert  2 - display 3-insert at head 4- delete 0- exit";
 		cin >> ch;
 		int data;
 		switch (ch)
@@ -90,6 +106,11 @@ int main()
 
 			cin >> data;
 			insertAtHead(data);
+			break;
+		case 4:
+
+			cin >> data;
+			deletion(data);
 			break;
 		default:
 			break;
